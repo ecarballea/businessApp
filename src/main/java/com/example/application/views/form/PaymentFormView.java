@@ -23,13 +23,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class PaymentFormView extends FormLayout {
-//    TextField firstName = new TextField("First name");
-    TextField statusEnum = new TextField("Status");
-//    ComboBox<Status_Enum> statusEnum = new ComboBox<>("Status");
+    ComboBox<String> statusEnum = new ComboBox<>("Status");
     ComboBox<Account> accountFrom = new ComboBox<>("Sender");
     ComboBox<Account> accountTo = new ComboBox<>("Receiver");
-//    TextField sender = new TextField("Sender");
-//    TextField receiver = new TextField("Receiver");
     TextField amount = new TextField("Amount");
     DatePicker dueDate = new DatePicker("Due Date");
 
@@ -45,14 +41,11 @@ public class PaymentFormView extends FormLayout {
         addClassName("payment-form");
         binder.bindInstanceFields(this);
 
-//        statusEnum.setItems(statuses);
-//        statusEnum.setItemLabelGenerator(Status_Enum::toString);
-
+        statusEnum.setItems("Pending", "Submitted", "Confirmed", "Failed");
         accountFrom.setItems(senderList);
         accountFrom.setItemLabelGenerator(Account::getOwner);
         accountTo.setItems(receiverList);
         accountTo.setItemLabelGenerator(Account::getOwner);
-
         Locale usLocale = new Locale("en", "US");
         dueDate.setLocale(usLocale);
         dueDate.setValue(LocalDate.now(ZoneId.systemDefault()));

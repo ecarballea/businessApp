@@ -3,6 +3,7 @@ package com.example.application.data.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -29,7 +30,7 @@ public class Payment {
     @NotNull
     private LocalDate dueDate = LocalDate.now();
 
-    @NotNull
+    @NotEmpty
     private String statusEnum = "";
 //    @Enumerated(EnumType.STRING)
 //    private Status_Enum statusEnum;

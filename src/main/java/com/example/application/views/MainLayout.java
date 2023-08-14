@@ -116,7 +116,7 @@ public class MainLayout extends AppLayout {
         Tabs tabs = new Tabs();
         tabs.add(
                 createTab(VaadinIcon.LIST, "Contacts", ListView.class),
-                createTab(VaadinIcon.PIGGY_BANK, "Accounts", AccountListView.class),
+                createTab(VaadinIcon.INSTITUTION, "Accounts", AccountListView.class),
                 createTab(VaadinIcon.CREDIT_CARD, "Payments", PaymentListView.class),
                 createTab(VaadinIcon.DASHBOARD, "Dashboard", DashboardView.class)
         );
