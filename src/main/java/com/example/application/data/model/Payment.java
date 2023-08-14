@@ -1,16 +1,11 @@
 package com.example.application.data.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -18,6 +13,8 @@ import java.util.UUID;
 @Data
 @Builder
 @NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 @Table(name = "payment")
 public class Payment {
@@ -27,26 +24,28 @@ public class Payment {
     private UUID id;
 
     @NotNull
-    private Double amount;
+    private Double amount = 0.0;
 
     @NotNull
-    private LocalDate dueDate;
+    private LocalDate dueDate = LocalDate.now();
 
     @NotNull
-    private String statusEnum;
+    private String statusEnum = "";
 //    @Enumerated(EnumType.STRING)
 //    private Status_Enum statusEnum;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "from_id")
+    @ManyToOne(cascade = {CascadeType.REFRESH})
+    @JoinColumn(name = "accountFrom_id")
     @JsonBackReference(value = "fromPaymentsFrom")
+//    @JsonIgnore
     private Account accountFrom;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "to_id")
+    @ManyToOne(cascade = {CascadeType.REFRESH})
+    @JoinColumn(name = "accountTo_id")
     @JsonBackReference(value = "toPaymentsTo")
+//    @JsonIgnore
     private Account accountTo;
 
 }

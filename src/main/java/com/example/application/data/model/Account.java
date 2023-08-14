@@ -34,12 +34,12 @@ public class Account extends AbstractEntity{
     @LastModifiedDate
     private Date updated;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "accountTo", cascade = CascadeType.ALL, targetEntity = Payment.class)
+    @OneToMany(mappedBy = "accountTo", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "toPaymentsTo")
     private List<Payment> paymentsTo = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "accountFrom", cascade = CascadeType.ALL, targetEntity = Payment.class)
+    @OneToMany(mappedBy = "accountFrom", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "fromPaymentsFrom")
     private List<Payment> paymentsFrom = new ArrayList<>();
 

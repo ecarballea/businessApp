@@ -76,10 +76,12 @@ public class PaymentListView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassNames("payment-grid");
         grid.setSizeFull();
-        grid.setColumns("statusEnum", "accountFrom", "accountTo");
+        grid.addColumn(Payment::getStatusEnum).setHeader("Status").setSortable(true);
+        grid.addColumn(payment -> payment.getAccountFrom().getOwner()).setHeader("From").setSortable(true);
+        grid.addColumn(payment -> payment.getAccountTo().getOwner()).setHeader("To").setSortable(true);
         grid.addColumn(PaymentListView::formatValue)
                 .setHeader("Availability ($)").setTextAlign(ColumnTextAlign.END).setSortable(true);
-        grid.addColumn(new LocalDateRenderer<>(PaymentListView::getModifiedDate, "MM/dd/yyyy"))
+        grid.addColumn(new LocalDateRenderer<>(PaymentListView::getModifiedDate, "MMM dd, yyyy"))
                 .setHeader("Due Date").setSortable(true);
 
 
