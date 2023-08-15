@@ -36,6 +36,14 @@ public class PaymentService {
         }
     }
 
+    public List<Payment> findByStatus(String stringStatus) {
+        if (stringStatus == null || stringStatus.isEmpty()) {
+            return paymentRepository.findAll();
+        } else {
+            return paymentRepository.findByStatusEnum(stringStatus);
+        }
+    }
+
 //    public List<Status_Enum> findAllStatusEnum() {
 //        return List.of(statusEnum.values());
 //    }

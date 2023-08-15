@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PaymentRepository extends JpaRepository<Payment, UUID> {
+    @Query("select p from Payment p where p.statusEnum = ?1")
+    List<Payment> findByStatusEnum(String statusEnum);
     @Query("""
             select p from Payment p
             where lower(p.accountFrom.owner) like lower(concat('%', :searchTerm, '%')) 
